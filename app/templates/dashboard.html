@@ -1,0 +1,173 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- HERO VISUEL -->
+<section class="dash-hero">
+
+    <div class="dash-hero-left">
+        <h1>
+            Empowering Democracy <br>
+            <span>Through Blockchain</span>
+        </h1>
+
+        <p>
+            Welcome {{ user.full_name }}.
+            Your vote is protected by cryptographic security,
+            verified on blockchain, and stored immutably.
+        </p>
+
+        <div class="dash-hero-buttons">
+            <a href="/elections" class="btn btn-primary">Explore Elections</a>
+            <a href="/history" class="dash-secondary-btn">View My Votes</a>
+        </div>
+    </div>
+
+    <div class="dash-hero-right">
+        <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1000" alt="Blockchain Illustration">
+    </div>
+
+</section>
+
+<!-- STATS SECTION -->
+<section class="dash-stats">
+
+    <div class="dash-stat-card">
+        <div class="dash-icon dash-icon-blue">
+            <i data-feather="bar-chart-2"></i>
+        </div>
+        <h3>{{ elections|length }}</h3>
+        <p>Active Elections</p>
+    </div>
+
+    <div class="dash-stat-card">
+        <div class="dash-icon dash-icon-green">
+            <i data-feather="shield"></i>
+        </div>
+        <h3>100%</h3>
+        <p>Secure Blockchain</p>
+    </div>
+
+    <div class="dash-stat-card">
+        <div class="dash-icon dash-icon-orange">
+            <i data-feather="users"></i>
+        </div>
+        <h3>Verified</h3>
+        <p>Biometric Voters</p>
+    </div>
+
+    <div class="dash-stat-card">
+        <div class="dash-icon dash-icon-purple">
+            <i data-feather="database"></i>
+        </div>
+        <h3>Immutable</h3>
+        <p>Vote Storage</p>
+    </div>
+
+</section>
+
+<!-- PROJECT VISION -->
+<section class="dash-vision">
+
+    <div class="dash-vision-text">
+        <h2>Our Mission</h2>
+        <p>
+            We aim to revolutionize digital democracy by combining
+            biometric authentication, artificial intelligence, and blockchain
+            technology into a single secure voting ecosystem.
+        </p>
+
+        <ul>
+            <li><i data-feather="check-circle"></i> Fraud-resistant voting</li>
+            <li><i data-feather="check-circle"></i> Transparent real-time results</li>
+            <li><i data-feather="check-circle"></i> Immutable blockchain records</li>
+        </ul>
+    </div>
+
+    <div class="dash-vision-image">
+        <img src="https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        alt="AI Blockchain Voting">
+    </div>
+
+</section>
+
+<!-- ACTIVE ELECTIONS -->
+<section class="dash-elections">
+
+    <div class="dash-section-header">
+        <h2>Live Elections</h2>
+        <p>
+            Participate securely and help shape the future of digital governance.
+        </p>
+    </div>
+
+    <div class="dash-election-grid">
+        {% for election in elections %}
+        <div class="dash-election-card">
+
+            <div class="dash-election-top">
+                <i data-feather="activity"></i>
+                <h3>{{ election.title }}</h3>
+            </div>
+
+            <p>{{ election.description }}</p>
+
+            <div class="dash-election-footer">
+                <span class="dash-badge-live">LIVE</span>
+                {% if user.role == "candidate" %}
+
+                    {% if election.id in user_candidate_election_ids %}
+                        <span class="elections-badge-success">
+                            <i data-feather="check-circle"></i>
+                            You are a Candidate
+                        </span>
+                    {% else %}
+                        <button class="btn btn-candidate"
+                                onclick="openManifestoModal('{{ election.id }}')">
+                            <i data-feather="edit-3"></i>
+                            Become Candidate
+                        </button>
+                    {% endif %}
+
+                {% endif %}
+                <a href="/election/{{ election.id }}" class="btn btn-primary">
+                    Vote Now
+                </a>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+</section>
+
+<!-- ================= MANIFESTO MODAL ================= -->
+
+<div id="manifestoModal" class="manifesto-modal">
+    <div class="manifesto-modal-content">
+
+        <h3>Submit Your Manifesto</h3>
+        <p>Explain why you should be elected for this position.</p>
+
+        <form id="manifestoForm" method="post">
+            <textarea name="manifesto"
+                        placeholder="Write your manifesto here..."
+                        required></textarea>
+
+            <div class="manifesto-actions">
+                <button type="button"
+                        class="btn-cancel"
+                        onclick="closeManifestoModal()">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                        class="btn-submit">
+                    Submit Application
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

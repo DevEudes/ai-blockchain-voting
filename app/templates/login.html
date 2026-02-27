@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login | AI Voting</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="authx-body">
+
+<div class="authx-floating-bubbles">
+    <div class="authx-bubble bubble-1">🔐 Blockchain Secured</div>
+    <div class="authx-bubble bubble-2">🤖 AI Face Verification</div>
+    <div class="authx-bubble bubble-3">🗳️ Transparent Elections</div>
+    <div class="authx-bubble bubble-4">🔎 Immutable Records</div>
+</div>
+
+<div class="authx-wrapper">
+
+    <div class="authx-card">
+
+        <div class="authx-header">
+            <h2>AI Blockchain Voting</h2>
+            <p>
+                A next-generation digital voting system combining
+                biometric authentication and blockchain transparency.
+            </p>
+        </div>
+
+        <form action="/auth/login" method="post" enctype="multipart/form-data" class="authx-form">
+
+            <div class="authx-form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="authx-form-group">
+                <label>Face Verification</label>
+                <input type="file" name="image" accept="image/*" required>
+            </div>
+            {% if error %}
+            <div class="authx-error-message" style="color: brown;">
+                {{ error }}
+            </div>
+            {% endif %}
+            <button type="submit" class="authx-btn-primary">
+                Secure Login
+            </button>
+
+        </form>
+
+        <div class="authx-footer">
+            <a href="/register">Create a secure account</a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

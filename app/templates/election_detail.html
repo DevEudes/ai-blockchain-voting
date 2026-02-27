@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="election-detail-hero">
+
+    <div class="election-detail-hero-left">
+        <h1>{{ election.title }}</h1>
+        <p>{{ election.description }}</p>
+
+        <div class="election-detail-meta">
+            <span>
+                <i data-feather="calendar"></i>
+                {{ election.start_date.strftime('%d %b %Y') }}
+            </span>
+            <span>
+                <i data-feather="calendar"></i>
+                {{ election.end_date.strftime('%d %b %Y') }}
+            </span>
+        </div>
+    </div>
+
+    <div class="election-detail-hero-right">
+        <i data-feather="activity" class="hero-icon-large"></i>
+    </div>
+
+</section>
+
+<div class="election-detail-divider"></div>
+
+<!-- ================= CANDIDATES SECTION ================= -->
+
+<section class="election-detail-section">
+
+    <div class="election-detail-header">
+        <h2>Meet the Candidates</h2>
+        <p>
+            Review each candidate’s vision and cast your vote securely
+            using blockchain verification.
+        </p>
+    </div>
+
+    <div class="election-detail-grid">
+
+        {% for candidate in candidates %}
+        <div class="election-detail-card">
+
+            <div class="candidate-top">
+                <div class="candidate-avatar">
+                    <i data-feather="user"></i>
+                </div>
+                <h3>{{ candidate.name }}</h3>
+            </div>
+
+            <p class="candidate-manifesto">
+                {{ candidate.manifesto }}
+            </p>
+
+            <div class="vote-progress-wrapper">
+
+                <div class="vote-progress-bar">
+                    <div class="vote-progress-fill"
+                            style="width: '{{ candidate.vote_percentage }}%' ">
+                    </div>
+                </div>
+
+                <span class="vote-percentage">
+                    {{ candidate.vote_percentage }}%
+                </span>
+
+            </div>
+
+            <form action="/vote/{{ election.id }}/{{ candidate.id }}"
+                    method="post"
+                    class="vote-form">
+
+                <button class="btn-vote-modern">
+                    <i data-feather="check-circle"></i>
+                    Vote for {{ candidate.name }}
+                </button>
+
+            </form>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

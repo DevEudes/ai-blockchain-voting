@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Voting System</title>
+
+    <link rel="icon" type="image/x-icon" href="/static/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<script>
+    function scrollCarousel(direction) {
+        const carousel = document.getElementById("carousel");
+        const cardWidth = carousel.querySelector(".election-card-modern").offsetWidth + 40;
+        carousel.scrollLeft += direction * cardWidth;
+    }
+</script>
+<body>
+
+<header class="app-navbar">
+
+    <div class="app-nav-left">
+        <div class="app-logo">
+            <i data-feather="shield"></i>
+            <span>AI Voting</span>
+        </div>
+    </div>
+
+    <div class="app-nav-right">
+
+        {% if user %}
+        <div class="app-user-info">
+            <i data-feather="user"></i>
+            <span>{{ user.full_name }}</span>
+        </div>
+
+        <a href="/auth/logout" class="app-logout-btn">
+            <i data-feather="log-out"></i>
+        </a>
+        {% endif %}
+
+    </div>
+
+</header>
+
+<div class="layout">
+    <aside class="sidebar">
+
+        <a href="/"
+            class="{% if active_page == 'dashboard' %}active{% endif %}">
+            <i data-feather="home"></i>
+            Dashboard
+        </a>
+
+        <a href="/elections"
+            class="{% if active_page == 'elections' %}active{% endif %}">
+            <i data-feather="bar-chart-2"></i>
+            Elections
+        </a>
+
+        <a href="/profile"
+            class="{% if active_page == 'profile' %}active{% endif %}">
+            <i data-feather="user"></i>
+            Profile
+        </a>
+
+        <a href="/history"
+            class="{% if active_page == 'history' %}active{% endif %}">
+            <i data-feather="clock"></i>
+            History
+        </a>
+
+        {% if user and user.role == "admin" %}
+        <a href="/admin/dashboard"
+        class="{% if active_page == 'admin' %}active{% endif %}">
+            <i data-feather="settings"></i>
+            Admin Panel
+        </a>
+        {% endif %}
+
+    </aside>
+
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+</div>
+
+<footer class="footer">
+    © 2026 AI Blockchain Voting System
+</footer>
+
+<script src="https://unpkg.com/feather-icons"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        /* Feather Icons */
+        feather.replace();
+
+        /* Carousel logic (seulement si présent) */
+        const items = document.querySelectorAll(".carousel-item");
+
+        if (items.length > 0) {
+
+            let current = 0;
+
+            function update() {
+                items.forEach((item, index) => {
+                    item.classList.remove("active");
+                    if(index === current){
+                        item.classList.add("active");
+                    }
+                });
+            }
+
+            window.next = function(){
+                current = (current + 1) % items.length;
+                update();
+            }
+
+            window.prev = function(){
+                current = (current - 1 + items.length) % items.length;
+                update();
+            }
+
+            update();
+        }
+
+    });
+    function openManifestoModal(electionId) {
+        const modal = document.getElementById("manifestoModal");
+        const form = document.getElementById("manifestoForm");
+
+        form.action = "/candidate/apply/" + electionId;
+
+        modal.classList.add("active");
+    }
+
+    function closeManifestoModal() {
+        document.getElementById("manifestoModal")
+                .classList.remove("active");
+    }
+</script>
+
+</body>
+</html>

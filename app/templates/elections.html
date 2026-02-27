@@ -1,0 +1,143 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<section class="elections-hero">
+    <h1 class="elections-title">Explore Elections</h1>
+    <p class="elections-subtitle">
+        Browse ongoing and upcoming elections. Review their objectives,
+        timelines, and securely participate through blockchain-powered voting.
+    </p>
+</section>
+
+<div class="elections-divider"></div>
+
+<section class="elections-info-wrapper">
+
+    <div class="elections-info-card">
+        <i data-feather="shield"></i>
+        <div>
+            <h3>Secure Voting</h3>
+            <p>Votes are encrypted and stored immutably on blockchain.</p>
+        </div>
+    </div>
+
+    <div class="elections-info-card">
+        <i data-feather="eye"></i>
+        <div>
+            <h3>Transparency</h3>
+            <p>Live vote tracking with full transparency and auditability.</p>
+        </div>
+    </div>
+
+    <div class="elections-info-card">
+        <i data-feather="clock"></i>
+        <div>
+            <h3>Time Bound</h3>
+            <p>Each election has a strict start and end date.</p>
+        </div>
+    </div>
+
+</section>
+
+<div class="elections-divider"></div>
+
+<section class="elections-main-section">
+
+    <div class="elections-section-header">
+        <h2>Available Elections</h2>
+        <p>Select an election to review candidates and cast your vote.</p>
+    </div>
+
+    <div class="elections-card-grid">
+        {% for election in elections %}
+        <div class="elections-card">
+
+            <div class="elections-card-top">
+                <div class="elections-icon-box">
+                    <i data-feather="bar-chart-2"></i>
+                </div>
+
+                <div>
+                    <h3>{{ election.title }}</h3>
+                    <p class="elections-card-description">
+                        {{ election.description }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="elections-meta">
+                <span>
+                    <i data-feather="calendar"></i>
+                    {{ election.start_date.strftime('%d %b %Y') }}
+                </span>
+
+                <span>
+                    <i data-feather="calendar"></i>
+                    {{ election.end_date.strftime('%d %b %Y') }}
+                </span>
+            </div>
+
+            <div class="elections-card-footer">
+
+                {% if election.is_active %}
+                    <span class="elections-badge-active">Active</span>
+                {% else %}
+                    <span class="elections-badge-closed">Closed</span>
+                {% endif %}
+
+                {% if user.role == "candidate" %}
+
+                    {% if election.id in user_candidate_election_ids %}
+                        <span class="elections-badge-success">
+                            <i data-feather="check-circle"></i>
+                            You are a Candidate
+                        </span>
+                    {% else %}
+                        <button class="btn btn-candidate"
+                                onclick="openManifestoModal('{{ election.id }}')">
+                            Become Candidate
+                        </button>
+                    {% endif %}
+
+                {% endif %}
+
+                <a href="/election/{{ election.id }}" class="btn btn-primary">
+                    View Election
+                </a>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="manifestoModal" class="manifesto-modal">
+        <div class="manifesto-modal-content">
+
+            <h3>Submit Your Manifesto</h3>
+            <p>Explain why you should be elected.</p>
+
+            <form id="manifestoForm" method="post">
+                <textarea name="manifesto"
+                            placeholder="Write your manifesto here..."
+                            required></textarea>
+
+                <div class="manifesto-actions">
+                    <button type="button"
+                            class="btn-cancel"
+                            onclick="closeManifestoModal()">
+                        Cancel
+                    </button>
+
+                    <button type="submit"
+                            class="btn-submit">
+                        Submit
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,1983 @@
+/* ========================= */
+/* GLOBAL RESET */
+/* ========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f4f7fb;
+    color: #1e293b;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========================= */
+/* LAYOUT */
+/* ========================= */
+
+.layout {
+    display: flex;
+    flex: 1;
+}
+
+.content {
+    flex: 1;
+    padding: 60px 60px;
+}
+
+/* ========================= */
+/* NAVBAR */
+/* ========================= */
+
+.navbar {
+    height: 70px;
+    background: white;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    font-weight: 600;
+}
+
+/* ========================= */
+/* SIDEBAR */
+/* ========================= */
+
+.sidebar {
+    width: 240px;
+    background: white;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.04);
+    position: relative;
+    transition: 0.3s ease;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    color: #334155;
+    transition: 0.25s ease;
+}
+
+.sidebar a:hover {
+    background: #eef6ff;
+    color: #2563eb;
+}
+
+.sidebar a.active {
+    background: linear-gradient(135deg,#3b82f6,#2563eb);
+    color: white;
+    font-weight: 600;
+}
+
+.sidebar a.active i {
+    color: white;
+}
+
+.sidebar a.active::before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60%;
+    width: 4px;
+    background: #2563eb;
+    border-radius: 4px;
+}
+/* ========================= */
+/* FOOTER */
+/* ========================= */
+
+.footer {
+    height: 60px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+}
+
+/* ========================= */
+/* TYPOGRAPHY */
+/* ========================= */
+
+.page-title {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.subtitle {
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+/* ========================= */
+/* CARD SYSTEM */
+/* ========================= */
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* ========================= */
+/* ELECTION CARD */
+/* ========================= */
+
+.election-card {
+    border-left: 4px solid #6366f1;
+    background: linear-gradient(145deg, #ffffff, #f8faff);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.card-header i {
+    color: #6366f1;
+}
+
+.card-footer {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.badge {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ========================= */
+/* BUTTON SYSTEM */
+/* ========================= */
+
+.btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.btn-primary {
+    margin-top: 30px;
+    padding: 12px 25px;
+    background: #6366f1;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* .btn-login {
+    margin-top: 30px;
+    padding: 12px 25px;
+    background: #6366f1;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+} */
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37,99,235,0.3);
+}
+
+.btn-danger {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+}
+
+/* ========================= */
+/* PROFILE */
+/* ========================= */
+
+.profile-card {
+    padding: 40px;
+}
+
+/* ========================= */
+/* AUTH PAGES */
+/* ========================= */
+
+body.auth-body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.auth-card {
+    width: 380px;
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.08);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    color: white;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group input {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+.form-group input[type="file"] {
+    background: white;
+    padding: 6px;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.auth-footer a {
+    color: #00c6ff;
+    text-decoration: none;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* ========================= */
+/* USER + LOGOUT */
+/* ========================= */
+
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logout-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: #ef4444;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    transition: 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #dc2626;
+}
+
+/* ========================= */
+/* DASHBOARD HERO */
+/* ========================= */
+
+.dashboard-hero {
+    margin-bottom: 70px;
+}
+
+.dashboard-hero h1 {
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.dashboard-hero p {
+    max-width: 650px;
+    color: #64748b;
+    line-height: 1.7;
+}
+
+/* ========================= */
+/* SECTION SPACING */
+/* ========================= */
+
+.section {
+    margin-top: 60px;
+}
+
+.section h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+/* ========================= */
+/* DASHBOARD TEXT STRUCTURE */
+/* ========================= */
+
+.dashboard-hero {
+    margin-bottom: 80px;
+}
+
+.dashboard-hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+}
+
+.hero-subtext {
+    font-size: 18px;
+    max-width: 700px;
+    line-height: 1.8;
+    color: #64748b;
+}
+
+.dashboard-divider {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 60px 0;
+}
+
+/* ========================= */
+/* SECTION HEADER */
+/* ========================= */
+
+.dashboard-section {
+    margin-top: 40px;
+}
+
+.section-header {
+    margin-bottom: 50px;
+}
+
+.section-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.section-header p {
+    max-width: 750px;
+    line-height: 1.7;
+    color: #64748b;
+}
+
+/* ========================= */
+/* ELECTION DESCRIPTION */
+/* ========================= */
+
+.election-description {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* ================================= */
+/* ELECTIONS PAGE STYLES (ISOLATED) */
+/* ================================= */
+
+.elections-hero {
+    margin-bottom: 70px;
+}
+
+.elections-title {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.elections-subtitle {
+    max-width: 720px;
+    line-height: 1.8;
+    color: #64748b;
+}
+
+.elections-divider {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 60px 0;
+}
+
+/* INFO CARDS */
+
+.elections-info-wrapper {
+    display: flex;
+    gap: 40px;
+}
+
+.elections-info-card {
+    flex: 1;
+    display: flex;
+    gap: 15px;
+    padding: 25px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
+}
+
+.elections-info-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.08);
+}
+
+.elections-info-card i {
+    color: #2563eb;
+    width: 28px;
+    height: 28px;
+}
+
+/* SECTION HEADER */
+
+.elections-section-header {
+    margin-bottom: 50px;
+}
+
+.elections-section-header h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.elections-section-header p {
+    color: #64748b;
+}
+
+/* GRID */
+
+.elections-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 40px;
+}
+
+/* CARD */
+
+.elections-card {
+    background: white;
+    padding: 35px;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.05);
+    transition: 0.4s ease;
+    animation: electionsFadeUp 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.elections-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.08);
+}
+
+@keyframes electionsFadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.elections-card-top {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.elections-icon-box {
+    background: linear-gradient(135deg,#3b82f6,#2563eb);
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.elections-card-description {
+    margin-top: 6px;
+    color: #64748b;
+}
+
+.elections-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.elections-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.elections-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.elections-badge-active {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.elections-badge-closed {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* ===================================== */
+/* DASHBOARD REDESIGN - ISOLATED STYLE */
+/* ===================================== */
+
+/* HERO */
+
+.dash-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    padding: 80px 0;
+}
+
+.dash-hero-left h1 {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.dash-hero-left span {
+    background: linear-gradient(135deg,#3b82f6,#6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.dash-hero-left p {
+    margin: 25px 0;
+    max-width: 600px;
+    line-height: 1.8;
+    color: #64748b;
+}
+
+.dash-hero-buttons {
+    /* display: flex; */
+    gap: 20px;
+}
+
+.dash-secondary-btn {
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: #e2e8f0;
+    color: #1e293b;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.dash-hero-right img {
+    width: 450px;
+    border-radius: 20px;
+    animation: dashFloat 4s ease-in-out infinite;
+}
+
+@keyframes dashFloat {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* STATS */
+
+.dash-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 30px;
+    margin-bottom: 100px;
+}
+
+.dash-stat-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+.dash-stat-card:hover {
+    transform: translateY(-8px);
+}
+
+.dash-stat-card i {
+    color: #6366f1;
+    margin-bottom: 15px;
+}
+
+/* VISION */
+
+.dash-vision {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    margin-bottom: 120px;
+}
+
+.dash-vision-text ul {
+    margin-top: 20px;
+    list-style: none;
+}
+
+.dash-vision-text li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.dash-vision-text i {
+    color: #22c55e;
+}
+
+.dash-vision-image img {
+    width: 450px;
+    border-radius: 20px;
+}
+
+/* ELECTIONS */
+
+.dash-section-header {
+    margin-bottom: 50px;
+}
+
+.dash-section-header h2 {
+    font-size: 32px;
+}
+
+.dash-election-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+    gap: 40px;
+}
+
+.dash-election-card {
+    background: white;
+    padding: 35px;
+    border-radius: 24px;
+    box-shadow: 0 25px 70px rgba(0,0,0,0.05);
+    transition: 0.4s;
+}
+
+.dash-election-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 35px 90px rgba(0,0,0,0.08);
+}
+
+.dash-election-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.dash-election-top i {
+    color: #6366f1;
+}
+
+.dash-election-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.dash-badge-live {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* ================================= */
+/* DASH COLORED ICON SYSTEM */
+/* ================================= */
+
+.dash-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.dash-icon i {
+    width: 22px;
+    height: 22px;
+    stroke-width: 2.5;
+}
+
+/* BLUE */
+
+.dash-icon-blue {
+    background: linear-gradient(135deg,#3b82f6,#2563eb);
+}
+
+.dash-icon-blue i {
+    color: white;
+}
+
+/* GREEN */
+
+.dash-icon-green {
+    background: linear-gradient(135deg,#22c55e,#15803d);
+}
+
+.dash-icon-green i {
+    color: white;
+}
+
+/* PURPLE */
+
+.dash-icon-purple {
+    background: linear-gradient(135deg,#8b5cf6,#6d28d9);
+}
+
+.dash-icon-purple i {
+    color: white;
+}
+
+/* ORANGE */
+
+.dash-icon-orange {
+    background: linear-gradient(135deg,#f97316,#ea580c);
+}
+
+.dash-icon-orange i {
+    color: white;
+}
+
+/* HOVER EFFECT */
+
+.dash-icon:hover {
+    transform: translateY(-4px) scale(1.05);
+}
+
+/* ================================= */
+/* PROFILE CLEAN VERSION */
+/* ================================= */
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.profile-avatar-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#3b82f6,#6366f1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.profile-avatar-box i {
+    width: 35px;
+    height: 35px;
+}
+
+.profile-header-info h1 {
+    font-size: 28px;
+}
+
+.profile-header-info p {
+    color: #64748b;
+}
+
+/* Divider */
+
+.profile-section-divider {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 50px 0;
+}
+
+/* Grid */
+
+.profile-main-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(400px,1fr));
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+/* Card */
+
+.profile-info-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
+}
+
+.profile-info-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Card Title */
+
+.profile-card-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.profile-card-title h3 {
+    font-size: 20px;
+}
+
+/* Data Rows */
+
+.profile-data-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.profile-data-row span {
+    color: #64748b;
+}
+
+.profile-wallet-text {
+    font-family: monospace;
+    font-size: 13px;
+    word-break: break-all;
+}
+
+/* Status Section */
+
+.profile-status-card {
+    background: #f8fafc;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Icon System */
+
+.profile-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.profile-icon-blue {
+    background: linear-gradient(135deg,#3b82f6,#2563eb);
+}
+
+.profile-icon-purple {
+    background: linear-gradient(135deg,#8b5cf6,#6d28d9);
+}
+
+.profile-icon-green {
+    background: linear-gradient(135deg,#22c55e,#15803d);
+}
+
+/* ================================= */
+/* HISTORY PAGE STYLES */
+/* ================================= */
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.history-header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.history-header p {
+    color: #64748b;
+}
+
+/* Summary Card */
+
+.history-summary-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: white;
+    padding: 25px 35px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.05);
+}
+
+.history-summary-card h3 {
+    font-size: 26px;
+}
+
+/* Divider */
+
+.history-divider {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 40px 0;
+}
+
+/* Table */
+
+.history-table-wrapper {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 25px 70px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.history-table-header,
+.history-table-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 1fr 120px;
+    padding: 18px 30px;
+    align-items: center;
+}
+
+.history-table-header {
+    background: #f8fafc;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.history-table-row {
+    border-top: 1px solid #f1f5f9;
+    transition: 0.2s ease;
+}
+
+.history-table-row:hover {
+    background: #f9fafb;
+}
+
+/* Hash */
+
+.history-hash {
+    font-family: monospace;
+    font-size: 12px;
+    color: #475569;
+    word-break: break-all;
+}
+
+/* Election ID */
+
+.history-election-id {
+    font-weight: 600;
+    color: #3b82f6;
+}
+
+/* Empty State */
+
+.history-empty-state {
+    text-align: center;
+    padding: 60px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.05);
+}
+
+.history-empty-state p {
+    margin-top: 15px;
+    color: #64748b;
+}
+
+/* Icon System */
+
+.history-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.history-icon-blue {
+    background: linear-gradient(135deg,#3b82f6,#2563eb);
+}
+
+.history-icon-gray {
+    background: #94a3b8;
+}
+
+/* ================================= */
+/* APP NAVBAR - PREMIUM */
+/* ================================= */
+
+.app-navbar {
+    height: 70px;
+    padding: 0 40px;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.app-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.app-logo i {
+    color: #3b82f6;
+}
+
+.app-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.app-user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    color: #334155;
+}
+
+/* Logout Button */
+
+.app-logout-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fee2e2;
+    color: #b91c1c;
+    transition: 0.3s ease;
+}
+
+.app-logout-btn:hover {
+    background: #ef4444;
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* ================================= */
+/* APP SIDEBAR */
+/* ================================= */
+
+.app-sidebar {
+    width: 260px;
+    background: white;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-right: 1px solid #f1f5f9;
+}
+
+.app-side-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 16px;
+    border-radius: 14px;
+    text-decoration: none;
+    color: #334155;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.app-side-link:hover {
+    background: #f8fafc;
+    transform: translateX(4px);
+}
+
+/* ACTIVE STATE */
+
+.app-active {
+    background: linear-gradient(135deg,#3b82f6,#6366f1);
+    color: white;
+}
+
+.app-active span {
+    color: white;
+}
+
+/* ICON SYSTEM */
+
+.app-side-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.app-icon-blue {
+    background: linear-gradient(135deg,#3b82f6,#2563eb);
+}
+
+.app-icon-purple {
+    background: linear-gradient(135deg,#8b5cf6,#6d28d9);
+}
+
+.app-icon-green {
+    background: linear-gradient(135deg,#22c55e,#15803d);
+}
+
+.app-icon-orange {
+    background: linear-gradient(135deg,#f97316,#ea580c);
+}
+
+/* Animation subtle */
+
+.app-side-link {
+    position: relative;
+}
+
+.app-side-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background: #3b82f6;
+    transition: 0.3s;
+}
+
+.app-side-link:hover::after {
+    width: 100%;
+}
+
+/* ================================= */
+/* AUTH LIGHT CLOUD DESIGN */
+/* ================================= */
+
+.authx-body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    background: linear-gradient(135deg,#dbeafe,#f0f9ff,#e0f2fe);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ================= CLOUD BUBBLES ================= */
+
+.authx-floating-bubbles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Cloud shape */
+
+.authx-bubble {
+    position: absolute;
+    background: white;
+    padding: 16px 26px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #334155;
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.08),
+        inset 0 -4px 10px rgba(0,0,0,0.05);
+    animation: floatCloud 6s ease-in-out infinite;
+}
+
+/* Cloud circles */
+
+.authx-bubble::before,
+.authx-bubble::after {
+    content: "";
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+}
+
+.authx-bubble::before {
+    width: 40px;
+    height: 40px;
+    top: -20px;
+    left: 20px;
+}
+
+.authx-bubble::after {
+    width: 30px;
+    height: 30px;
+    top: -15px;
+    right: 20px;
+}
+
+/* Positions */
+
+.bubble-1 { top: 15%; left: 10%; animation-delay: 0s; }
+.bubble-2 { top: 65%; left: 15%; animation-delay: 0s; }
+.bubble-3 { top: 20%; right: 10%; animation-delay: 0s; }
+.bubble-4 { bottom: 15%; right: 20%; animation-delay: 0s; }
+
+/* Floating animation */
+
+@keyframes floatCloud {
+    0%   { transform: translate(0,0); }
+    25%  { transform: translate(10px,-15px); }
+    50%  { transform: translate(-10px,-25px); }
+    75%  { transform: translate(5px,-10px); }
+    100% { transform: translate(0,0); }
+}
+
+/* ================= CARD ================= */
+
+.authx-wrapper {
+    z-index: 10;
+}
+
+.authx-card {
+    width: 440px;
+    padding: 50px;
+    border-radius: 28px;
+    background: white;
+    box-shadow: 0 40px 80px rgba(59,130,246,0.15);
+    color: #1e293b;
+    animation: fadeInAuth 0.8s ease;
+}
+
+@keyframes fadeInAuth {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.authx-header h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.authx-header p {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+/* ================= FORM ================= */
+
+.authx-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.authx-form-group label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #475569;
+}
+
+.authx-form-group input {
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    outline: none;
+    transition: 0.3s;
+}
+
+.authx-form-group input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59,130,246,0.1);
+}
+
+/* ================= BUTTON ================= */
+
+.authx-btn-primary {
+    margin-top: 10px;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    background: linear-gradient(135deg,#3b82f6,#6366f1);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.authx-btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(99,102,241,0.35);
+}
+
+/* ================= FOOTER ================= */
+
+.authx-footer {
+    margin-top: 22px;
+    text-align: center;
+}
+
+.authx-footer a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.authx-footer a:hover {
+    text-decoration: underline;
+}
+
+.authx-form-group select {
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    outline: none;
+    background: white;
+    transition: 0.3s;
+}
+
+.authx-form-group select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59,130,246,0.1);
+}
+
+.authx-error-message {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 14px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    animation: fadeError 0.4s ease;
+    border: 1px solid #fecaca;
+}
+
+@keyframes fadeError {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn-candidate {
+    margin-top: 30px;
+    padding: 12px 25px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg,#f59e0b,#f97316);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-candidate:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(249,115,22,0.4);
+}
+
+/* ================= MANIFESTO MODAL ================= */
+
+.manifesto-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s ease;
+    z-index: 999;
+}
+
+.manifesto-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.manifesto-modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 450px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    animation: slideUp 0.3s ease;
+}
+
+.manifesto-modal-content h3 {
+    margin-bottom: 10px;
+}
+
+.manifesto-modal-content p {
+    margin-bottom: 20px;
+    color: #64748b;
+}
+
+.manifesto-modal textarea {
+    width: 100%;
+    height: 120px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    resize: none;
+    font-family: inherit;
+}
+
+.manifesto-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.btn-cancel {
+    background: #e2e8f0;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-submit {
+    background: linear-gradient(90deg, #6366f1, #4f46e5);
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ================= ELECTION SUCCESS BADGE ================= */
+
+.elections-badge-success {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 8px 14px;
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+
+    box-shadow: 0 6px 18px rgba(34, 197, 94, 0.35);
+
+    animation: fadeInBadge 0.4s ease;
+}
+
+/* Optional hover effect */
+.elections-badge-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.45);
+}
+
+/* Subtle entrance animation */
+@keyframes fadeInBadge {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================================================== */
+/* ================= ELECTION DETAIL =================== */
+/* ===================================================== */
+
+.election-detail-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    padding: 50px 0;
+}
+
+.election-detail-hero-left h1 {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.election-detail-hero-left p {
+    max-width: 600px;
+    opacity: 0.75;
+    line-height: 1.6;
+}
+
+.election-detail-meta {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.hero-icon-large {
+    width: 120px;
+    height: 120px;
+    color: #6366f1;
+    opacity: 0.8;
+}
+
+.election-detail-divider {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 30px 0;
+}
+
+.election-detail-section {
+    padding: 30px 0 60px 0;
+}
+
+.election-detail-header {
+    margin-bottom: 40px;
+}
+
+.election-detail-header h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.election-detail-header p {
+    max-width: 650px;
+    opacity: 0.7;
+}
+
+.election-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.election-detail-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+    transition: 0.3s ease;
+}
+
+.election-detail-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.1);
+}
+
+.candidate-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.candidate-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+}
+
+.candidate-manifesto {
+    margin-bottom: 20px;
+    opacity: 0.75;
+    line-height: 1.6;
+}
+
+.vote-progress-wrapper {
+    margin-bottom: 20px;
+}
+
+.vote-progress-bar {
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.vote-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1, #4f46e5);
+    border-radius: 20px;
+    transition: width 0.6s ease;
+}
+
+.vote-percentage {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.btn-vote-modern {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(90deg, #0ea5e9, #0284c7);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-vote-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(14,165,233,0.4);
+}
+
+
+/* ===================================================== */
+/* ================= ADMIN MODERN ====================== */
+/* ===================================================== */
+
+.admin-hero-modern {
+    padding: 50px 0 20px 0;
+}
+
+.admin-hero-modern h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.admin-divider {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 40px 0;
+}
+
+.admin-section-modern h2 {
+    margin-bottom: 25px;
+    font-size: 22px;
+}
+
+.admin-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.admin-card-modern {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+.admin-card-modern:hover {
+    transform: translateY(-5px);
+}
+
+.admin-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.admin-role-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Role colors */
+
+.role-admin { background:#fee2e2; color:#b91c1c; }
+.role-candidate { background:#e0f2fe; color:#0369a1; }
+.role-voter { background:#dcfce7; color:#15803d; }
+
+/* Election status */
+
+.admin-election-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.admin-election-badge.active {
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.admin-election-badge.closed {
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.admin-date {
+    font-size: 13px;
+    opacity: 0.7;
+    margin-top: 8px;
+}
+
+.admin-card-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+/* Buttons */
+
+.admin-btn-edit {
+    background:#3b82f6;
+    color:white;
+    padding:6px 12px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.admin-btn-edit:hover {
+    background:#2563eb;
+}
+
+.admin-btn-delete {
+    background:#ef4444;
+    color:white;
+    padding:6px 12px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.admin-btn-delete:hover {
+    background:#dc2626;
+}
+
+/* ================= STATUS BADGE ================= */
+
+.admin-status-wrapper {
+    margin-top: 12px;
+}
+
+.admin-status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+/* Verified */
+.admin-status-badge.verified {
+    background: #22c55e;
+    color: white;
+}
+
+/* Pending */
+.admin-status-badge.pending {
+    background: #facc15;
+    color: #713f12;
+}
+
+.admin-status-badge.pending:hover {
+    background: #eab308;
+}
+
+/* Forms */
+
+.admin-form-modern {
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    max-width:500px;
+}
+
+.admin-form-modern input,
+.admin-form-modern textarea,
+.admin-form-modern select {
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #e2e8f0;
+}
+
+.admin-checkbox-group {
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    max-height:150px;
+    overflow-y:auto;
+    padding:10px;
+    border:1px solid #e2e8f0;
+    border-radius:8px;
+}
+
+.admin-btn-primary {
+    padding:10px;
+    border-radius:10px;
+    background:linear-gradient(90deg,#6366f1,#4f46e5);
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+.admin-btn-primary:hover {
+    opacity:0.9;
+}
+
+/* ================= MODAL ================= */
+
+.admin-modal {
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.4);
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+}
+
+.admin-modal-content {
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    width:400px;
+}
+
+.admin-modal-actions {
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:20px;
+}
+
+.admin-btn-cancel {
+    background:#e5e7eb;
+    border:none;
+    padding:6px 12px;
+    border-radius:6px;
+    cursor:pointer;
+}

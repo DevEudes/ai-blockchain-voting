@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register | AI Voting</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="authx-body">
+
+<div class="authx-floating-bubbles">
+    <div class="authx-bubble bubble-1">🔐 Secure Identity</div>
+    <div class="authx-bubble bubble-2">🧠 AI Authentication</div>
+    <div class="authx-bubble bubble-3">🌍 Digital Democracy</div>
+    <div class="authx-bubble bubble-4">⚡ Instant Verification</div>
+</div>
+
+<div class="authx-wrapper">
+
+    <div class="authx-card">
+
+        <div class="authx-header">
+            <h2>Create Account</h2>
+            <p>
+                Join a secure and transparent voting ecosystem
+                powered by artificial intelligence and blockchain.
+            </p>
+        </div>
+
+        <form action="/auth/register" method="post" enctype="multipart/form-data" class="authx-form">
+
+            <div class="authx-form-group">
+                <label>Full Name</label>
+                <input type="text" name="full_name" required>
+            </div>
+
+            <div class="authx-form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div class="authx-form-group">
+                <label>Password</label>
+                <input type="password" name="password" required>
+            </div>
+
+            <div class="authx-form-group">
+                <label>Confirm Password</label>
+                <input type="password" name="confirm_password" required>
+            </div>
+
+            <div class="authx-form-group">
+                <label>Account Type</label>
+                <select name="role" required>
+                    <option value="voter">Voter</option>
+                    <option value="candidate">Candidate</option>
+                </select>
+            </div>
+
+            <div class="authx-form-group">
+                <label>Face Registration</label>
+                <input type="file" name="image" accept="image/*" required>
+            </div>
+
+            <button type="submit" class="authx-btn-primary">
+                Register Securely
+            </button>
+
+        </form>
+
+        <div class="authx-footer">
+            <a href="/login">Already registered? Login</a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,252 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<section class="admin-hero-modern">
+    <h1>Admin Control Panel</h1>
+    <p>Manage users, elections and system access.</p>
+</section>
+
+<div class="admin-divider"></div>
+
+<!-- ================= USERS MANAGEMENT ================= -->
+
+<section class="admin-section-modern">
+
+    <h2>Users Management</h2>
+
+    <div class="admin-card-grid">
+
+        {% for u in users %}
+        <div class="admin-card-modern">
+
+            <div class="admin-card-header">
+                <h3>{{ u.full_name }}</h3>
+                <span class="admin-role-badge role-{{ u.role }}">
+                    {{ u.role|capitalize }}
+                </span>
+            </div>
+
+            <p>{{ u.email }}</p>
+
+            <div class="admin-status-wrapper">
+                {% if u.is_verified %}
+                    <span class="admin-status-badge verified">
+                        ✓ Verified
+                    </span>
+                {% else %}
+                    <a href="/admin/verify/{{ u.id }}"
+                        class="admin-status-badge pending">
+                        Verify Account
+                    </a>
+                {% endif %}
+            </div>
+
+            <div class="admin-card-actions">
+                <button onclick="openUserModal('{{ u.id }}', '{{ u.full_name }}', '{{ u.role }}')"
+                        class="admin-btn-edit">
+                    Edit
+                </button>
+
+                <button onclick="confirmDelete('/admin/delete-user/{{ u.id }}')"
+                        class="admin-btn-delete">
+                    Delete
+                </button>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<div class="admin-divider"></div>
+
+<!-- ================= ELECTIONS MANAGEMENT ================= -->
+
+<section class="admin-section-modern">
+
+    <h2>Elections Management</h2>
+
+    <div class="admin-card-grid">
+
+        {% for e in elections %}
+        <div class="admin-card-modern">
+
+            <div class="admin-card-header">
+                <h3>{{ e.title }}</h3>
+                {% if e.is_active %}
+                <span class="admin-election-badge active">Active</span>
+                {% else %}
+                <span class="admin-election-badge closed">Closed</span>
+                {% endif %}
+            </div>
+
+            <p>{{ e.description }}</p>
+
+            <p class="admin-date">
+                {{ e.start_date.strftime('%d %b %Y') }} →
+                {{ e.end_date.strftime('%d %b %Y') }}
+            </p>
+
+            <div class="admin-card-actions">
+                <button onclick="openElectionModal('{{ e.id }}', '{{ e.title }}', '{{ e.description }}')"
+                        class="admin-btn-edit">
+                    Edit
+                </button>
+
+                <button onclick="confirmDelete('/admin/delete-election/{{ e.id }}')"
+                        class="admin-btn-delete">
+                    Delete
+                </button>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<div class="admin-divider"></div>
+
+<!-- ================= CREATION SECTION ================= -->
+
+<section class="admin-section-modern">
+
+    <h2>Create New User</h2>
+
+    <form action="/admin/create-user"
+          method="post"
+          enctype="multipart/form-data"
+          class="admin-form-modern">
+
+        <input type="text" name="full_name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+
+        <select name="role" required>
+            <option value="voter">Voter</option>
+            <option value="candidate">Candidate</option>
+            <option value="admin">Admin</option>
+        </select>
+
+        <input type="file" name="image" accept="image/*" required>
+
+        <button class="admin-btn-primary">Create User</button>
+
+    </form>
+
+</section>
+
+<div class="admin-divider"></div>
+
+<section class="admin-section-modern">
+
+    <h2>Create New Election</h2>
+
+    <form action="/admin/create-election"
+          method="post"
+          class="admin-form-modern">
+
+        <input type="text" name="title" placeholder="Election Title" required>
+        <textarea name="description" placeholder="Description" required></textarea>
+        <input type="date" name="start_date" required>
+        <input type="date" name="end_date" required>
+
+        <label>Select Candidates</label>
+
+        <div class="admin-checkbox-group">
+            {% for u in users if u.role == "candidate" %}
+            <label>
+                <input type="checkbox" name="candidate_ids" value="{{ u.id }}">
+                {{ u.full_name }}
+            </label>
+            {% endfor %}
+        </div>
+
+        <button class="admin-btn-primary">Create Election</button>
+
+    </form>
+
+</section>
+
+<!-- ================= USER EDIT MODAL ================= -->
+
+<div id="userModal" class="admin-modal">
+    <div class="admin-modal-content">
+        <h3>Edit User</h3>
+
+        <form id="userEditForm" method="post">
+            <input type="text" name="full_name" id="editUserName" required>
+
+            <select name="role" id="editUserRole">
+                <option value="voter">Voter</option>
+                <option value="candidate">Candidate</option>
+                <option value="admin">Admin</option>
+            </select>
+
+            <div class="admin-modal-actions">
+                <button type="button" onclick="closeModal()" class="admin-btn-cancel">
+                    Cancel
+                </button>
+                <button type="submit" class="admin-btn-primary">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ================= ELECTION EDIT MODAL ================= -->
+
+<div id="electionModal" class="admin-modal">
+    <div class="admin-modal-content">
+        <h3>Edit Election</h3>
+
+        <form id="electionEditForm" method="post">
+            <input type="text" name="title" id="editElectionTitle" required>
+            <textarea name="description" id="editElectionDesc" required></textarea>
+
+            <div class="admin-modal-actions">
+                <button type="button" onclick="closeModal()" class="admin-btn-cancel">
+                    Cancel
+                </button>
+                <button type="submit" class="admin-btn-primary">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+function openUserModal(id, name, role){
+    document.getElementById("userModal").style.display = "flex";
+    document.getElementById("editUserName").value = name;
+    document.getElementById("editUserRole").value = role;
+    document.getElementById("userEditForm").action = "/admin/edit-user/" + id;
+}
+
+function openElectionModal(id, title, description){
+    document.getElementById("electionModal").style.display = "flex";
+    document.getElementById("editElectionTitle").value = title;
+    document.getElementById("editElectionDesc").value = description;
+    document.getElementById("electionEditForm").action = "/admin/edit-election/" + id;
+}
+
+function closeModal(){
+    document.getElementById("userModal").style.display = "none";
+    document.getElementById("electionModal").style.display = "none";
+}
+
+function confirmDelete(url){
+    if(confirm("Are you sure you want to delete this item?")){
+        window.location.href = url;
+    }
+}
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<section class="history-header">
+
+    <div>
+        <h1>Voting History</h1>
+        <p>Track your voting activity and verify each transaction on the blockchain.</p>
+    </div>
+
+    <div class="history-summary-card">
+        <div class="history-icon history-icon-blue">
+            <i data-feather="activity"></i>
+        </div>
+        <div>
+            <h3>{{ votes|length }}</h3>
+            <p>Total Votes Cast</p>
+        </div>
+    </div>
+
+</section>
+
+<div class="history-divider"></div>
+
+<section class="history-table-section">
+
+    {% if votes|length == 0 %}
+        <div class="history-empty-state">
+            <div class="history-icon history-icon-gray">
+                <i data-feather="info"></i>
+            </div>
+            <p>You have not participated in any elections yet.</p>
+        </div>
+    {% else %}
+
+    <div class="history-table-wrapper">
+
+        <div class="history-table-header">
+            <span>Election</span>
+            <span>Vote Hash</span>
+            <span>Blockchain TX</span>
+            <span>Date</span>
+        </div>
+
+        {% for vote in votes %}
+        <div class="history-table-row">
+
+            <span class="history-election-id">
+                #{{ vote.election_id }}
+            </span>
+
+            <span class="history-hash">
+                {{ vote.vote_hash }}
+            </span>
+
+            <span class="history-hash">
+                {{ vote.blockchain_tx_hash }}
+            </span>
+
+            <span>
+                {{ vote.created_at.strftime('%d %b %Y') }}
+            </span>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
