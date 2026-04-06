@@ -1,59 +1,165 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login | AI Voting</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | AI Blockchain Voting</title>
+    <link rel="icon" type="image/x-icon" href="/static/icons/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            display: block !important;
+            background: #f1f5f9 !important;
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #1e293b;
+        }
+
+        .sh { display: flex; min-height: 100vh; width: 100%; }
+
+        /* LEFT */
+        .sh-left {
+            width: 380px; flex-shrink: 0;
+            background: linear-gradient(155deg, #1e3a8a 0%, #3730a3 55%, #1e1b4b 100%);
+            display: flex; flex-direction: column; padding: 52px 40px;
+            position: relative; overflow: hidden;
+        }
+        .sh-left::before {
+            content:''; position:absolute; top:-90px; left:-70px;
+            width:300px; height:300px; background:rgba(255,255,255,.04); border-radius:50%;
+        }
+        .sh-left::after {
+            content:''; position:absolute; bottom:-90px; right:-70px;
+            width:260px; height:260px; background:rgba(255,255,255,.05); border-radius:50%;
+        }
+        .sh-left-inner { position:relative; z-index:1; display:flex; flex-direction:column; height:100%; }
+        .brand-logo  { font-size:44px; margin-bottom:14px; line-height:1; }
+        .brand-name  { font-size:24px; font-weight:800; color:#fff; line-height:1.25; margin-bottom:10px; }
+        .brand-desc  { font-size:13px; color:rgba(255,255,255,.55); line-height:1.7; }
+        .feat-list   { flex:1; display:flex; flex-direction:column; justify-content:center; gap:22px; margin:44px 0; }
+        .feat        { display:flex; align-items:flex-start; gap:13px; }
+        .feat-icon   {
+            width:40px; height:40px; background:rgba(255,255,255,.1);
+            border:1px solid rgba(255,255,255,.14); border-radius:11px;
+            display:flex; align-items:center; justify-content:center;
+            font-size:18px; flex-shrink:0;
+        }
+        .feat-txt strong { display:block; color:#fff; font-size:13px; font-weight:700; margin-bottom:2px; }
+        .feat-txt span   { font-size:12px; color:rgba(255,255,255,.48); line-height:1.5; }
+        .brand-foot      { position:relative; z-index:1; font-size:11px; color:rgba(255,255,255,.25); }
+
+        /* RIGHT */
+        .sh-right {
+            flex:1; display:flex; align-items:center; justify-content:center;
+            padding:40px 32px; overflow-y:auto; background:#f1f5f9;
+        }
+
+        /* CARD */
+        .card {
+            width:100%; max-width:420px; background:#fff;
+            border-radius:22px; padding:36px 32px;
+            box-shadow:0 20px 60px rgba(0,0,0,.09);
+            text-align:center;
+        }
+        .card-title { font-size:22px; font-weight:800; color:#0f172a; margin-bottom:6px; }
+        .card-sub   { font-size:13px; color:#64748b; margin-bottom:24px; line-height:1.6; }
+
+        .err-box {
+            display:none; background:#fef2f2; border:1px solid #fecaca;
+            border-radius:9px; padding:10px 13px; font-size:13px;
+            color:#dc2626; margin-bottom:14px; text-align:center;
+        }
+
+        .card-foot {
+            text-align:center; margin-top:20px; font-size:13px; color:#64748b;
+        }
+        .card-foot a { color:#2563eb; font-weight:700; text-decoration:none; }
+        .card-foot a:hover { text-decoration:underline; }
+
+        @media (max-width:860px) {
+            .sh-left  { display:none; }
+            .sh-right { padding:24px 16px; }
+        }
+        @media (max-width:480px) {
+            .card { padding:24px 16px; border-radius:16px; }
+        }
+    </style>
 </head>
-<body class="authx-body">
+<body>
 
-<div class="authx-floating-bubbles">
-    <div class="authx-bubble bubble-1">🔐 Blockchain Secured</div>
-    <div class="authx-bubble bubble-2">🤖 AI Face Verification</div>
-    <div class="authx-bubble bubble-3">🗳️ Transparent Elections</div>
-    <div class="authx-bubble bubble-4">🔎 Immutable Records</div>
-</div>
+<div class="sh">
 
-<div class="authx-wrapper">
+    <div class="sh-left">
+        <div class="sh-left-inner">
+            <div>
+                <div class="brand-logo">&#128499;</div>
+                <div class="brand-name">AI Blockchain<br>Voting</div>
+                <p class="brand-desc">
+                    Next-generation electoral platform combining<br>
+                    biometric authentication and blockchain transparency.
+                </p>
+            </div>
 
-    <div class="authx-card">
+            <div class="feat-list">
+                <div class="feat">
+                    <div class="feat-icon">&#128274;</div>
+                    <div class="feat-txt">
+                        <strong>Biometric Security</strong>
+                        <span>Your face is your password — no PINs or cards needed.</span>
+                    </div>
+                </div>
+                <div class="feat">
+                    <div class="feat-icon">&#9982;&#65039;</div>
+                    <div class="feat-txt">
+                        <strong>Blockchain-Backed</strong>
+                        <span>Every vote is immutably recorded and publicly verifiable.</span>
+                    </div>
+                </div>
+                <div class="feat">
+                    <div class="feat-icon">&#129302;</div>
+                    <div class="feat-txt">
+                        <strong>Instant FaceID Login</strong>
+                        <span>Just look at the camera — automatic recognition.</span>
+                    </div>
+                </div>
+            </div>
 
-        <div class="authx-header">
-            <h2>AI Blockchain Voting</h2>
-            <p>
-                A next-generation digital voting system combining
-                biometric authentication and blockchain transparency.
-            </p>
+            <div class="brand-foot">
+                &copy; 2025 AI Blockchain Voting &middot; Secure &middot; Transparent
+            </div>
         </div>
+    </div>
 
-        <form action="/auth/login" method="post" enctype="multipart/form-data" class="authx-form">
+    <div class="sh-right">
+        <div class="card">
 
-            <div class="authx-form-group">
-                <label>Email Address</label>
-                <input type="email" name="email" placeholder="Enter your email" required>
+            <div class="card-title">Welcome back</div>
+            <div class="card-sub">
+                Just look at the camera to sign in.<br>
+                Your face is your identity — no email, no password.
             </div>
 
-            <div class="authx-form-group">
-                <label>Face Verification</label>
-                <input type="file" name="image" accept="image/*" required>
-            </div>
+            <!-- FaceCamera widget in scan mode — face only, no form fields -->
+            <div id="login-cam" style="margin-bottom:16px;"></div>
+
             {% if error %}
-            <div class="authx-error-message" style="color: brown;">
-                {{ error }}
-            </div>
+            <div id="login-error" class="err-box" data-server-error="true"
+                 style="display:block;">{{ error }}</div>
+            {% else %}
+            <div id="login-error" class="err-box" data-server-error="true"></div>
             {% endif %}
-            <button type="submit" class="authx-btn-primary">
-                Secure Login
-            </button>
 
-        </form>
+            <div class="card-foot">
+                Don't have an account? <a href="/register">Create one</a>
+            </div>
 
-        <div class="authx-footer">
-            <a href="/register">Create a secure account</a>
         </div>
-
     </div>
 
 </div>
 
+<script src="/static/js/script.js"></script>
 </body>
 </html>

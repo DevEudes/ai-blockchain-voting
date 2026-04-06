@@ -116,10 +116,11 @@
 
     <h2>Create New User</h2>
 
-    <form action="/admin/create-user"
+    <form id="admin-create-user-form"
+          action="/admin/create-user"
           method="post"
-          enctype="multipart/form-data"
-          class="admin-form-modern">
+          class="admin-form-modern"
+          novalidate>
 
         <input type="text" name="full_name" placeholder="Full Name" required>
         <input type="email" name="email" placeholder="Email" required>
@@ -131,9 +132,20 @@
             <option value="admin">Admin</option>
         </select>
 
-        <input type="file" name="image" accept="image/*" required>
+        <label style="font-size:13px;font-weight:600;color:#334155;">
+            Face Registration (camera)
+        </label>
+        <div id="admin-create-cam"></div>
 
-        <button class="admin-btn-primary">Create User</button>
+        <div id="admin-create-error-box"
+             style="color:brown;font-size:13px;display:none;"></div>
+
+        <button id="admin-create-submit-btn"
+                data-label="Create User"
+                class="admin-btn-primary"
+                disabled>
+            Create User
+        </button>
 
     </form>
 

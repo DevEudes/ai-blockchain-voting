@@ -11,6 +11,7 @@ from app.models.candidate import Candidate
 from app.utils.security import decode_token, hash_password
 from app.services.blockchain_service import generate_wallet_address
 from app.services.ai_auth_service import face_auth_service
+from app.routes.auth import _find_duplicate_face
 
 router = APIRouter(prefix="/admin", tags=["Admin"])
 templates = Jinja2Templates(directory="app/templates")
@@ -112,6 +113,11 @@ async def create_user(
     embedding = face_auth_service.get_embedding(image_bytes)
 
     if embedding is None:
+        return RedirectResponse("/admin/dashboard", status_code=303)
+
+    # Check for duplicate face
+    dup_voter, _ = _find_duplicate_face(embedding, db)
+    if dup_voter:
         return RedirectResponse("/admin/dashboard", status_code=303)
 
     embedding_json = json.dumps(embedding.tolist())

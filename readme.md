@@ -142,7 +142,7 @@ Blockchain:
 > psql postgres -U ai_user -d ai_voting
 
 # Activer l'environnement virtuel
-> source venv/bin/activate
+> source .venv/bin/activate
 
 # Lancer le serveur
 > python -m uvicorn app.main:app --reload
